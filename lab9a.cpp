@@ -1,39 +1,55 @@
-#include <iostream>
-using namespace std;
-
-int main()
+#include <stdio.h>
+#include <malloc.h>
+#include <stdlib.h>
+void input(int **a, int n,int *array)
 {
-    int n, *a;
-    cout<<"Введите размер матрицы: ";
-    cin>>n;
-    int array[n],max=0;
-    a = (int*)malloc(n*n * sizeof(int));
-    for (int i = 0; i < n; i++)
+    int i, j,max=0;
+    for (i = 0; i<n; i++)
     {
-        for (int j = 0; j < n; j++)
+        a[i] = (int*)malloc(n * sizeof(int));
+        for (j = 0; j<n; j++)
         {
-           *(a + i*n + j)=rand()%5;
-            cout<<*(a + i*n + j)<<" ";
-            if(*(a + i*n + j) > max)
+            a[i][j]=rand()%5;
+            printf("%d ",a[i][j]);
+            if(a[i][j] > max)
             {
-                max = *(a + i*n + j);
+                max = a[i][j];
                 array[i]=j;
             }
         }
-    cout<<"| max: "<<max<<" | pos: "<<array[i]<<endl;
+    printf("max - %d | pos - %d \n",max,array[i]);
     max=0;
-    }     
-    cout<<endl;
-    for (int i = 0; i < n; i++)
+    }
+    
+}
+
+
+void change(int **a, int n, int *array)
+{
+    int i, j;
+    for (i = 0; i<n; i++)
     {
-        for (int j = 0; j < n; j++)
+        for (j = 0; j<n; j++)
         {
             if (j<array[i])
-                *(a + i*n + j)=0;
-            cout<<*(a + i*n + j)<<" ";
+                a[i][j]=0;
+            printf("%d ",a[i][j]);
+            
         }
-    cout<<endl;
-    }  
-    delete a;
-    return 0;
+    printf("\n");
+    }
 }
+int main()
+{
+int **a;
+int i,n;
+printf("Введите размер матрицы: ");
+scanf("%d", &n);
+int array[n];
+a = (int**)malloc(n*n* sizeof(int*));
+input(a,n,array);
+change(a,n,array);
+free(a);
+return 0;
+}
+
