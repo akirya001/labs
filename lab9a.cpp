@@ -50,6 +50,7 @@ a = (int**)malloc(n*n* sizeof(int*));
 input(a,n,array);
 change(a,n,array);
 free(a);
+printf("Hello");
 return 0;
 }
 
